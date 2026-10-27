@@ -4,9 +4,7 @@ Offline evidence pipeline for a fictional Berlin payment institution, NordPay Gm
 
 NordPay is not a real company. A passing check is a passing check. It is not a certification, and the short titles in this repo are glosses written for the demo.
 
-![From a Terraform change to an auditor pack](docs/architecture.png)
-
-Marks in the diagram are the vendors'. Attribution is in [docs/icons/SOURCES.md](docs/icons/SOURCES.md).
+![NordPay evidence pipeline](docs/diagrams/architecture-simple.png)
 
 ## The numbers
 
@@ -44,6 +42,12 @@ make demo
 
 Open `dashboard/index.html` in a browser. The same rollup is `dashboard/soa.md`.
 
+## Documents
+
+- [Project report](docs/report.pdf), six pages.
+- [SoA and mapping workbook](docs/NordPay-ISO27001-SoA-and-Mapping.xlsx): the 93 Annex A controls, the rule mapping, and the results.
+- Diagram source: [docs/diagrams/architecture-simple.drawio](docs/diagrams/architecture-simple.drawio), with the SVG beside it.
+
 ## What sits where
 
 - `lz/` is the landing zone. Region and tags are locals, because the Rego resolves one `local.*` hop and leaves `${var...}` unevaluated, which fails closed. `terraform validate` is as far as v1 goes.
@@ -70,7 +74,6 @@ Two steps stay off unless a repository variable says otherwise. `EAC_CAPA=true` 
 - Checkov 3.2.449 matches internet sources by exact string. `*` is in that list. The CIDR `0.0.0.0/0` is not, so the SSH and RDP fixtures use `*`. A rule written with the CIDR would slip past those two checks.
 - `CKV_AZURE_3` passes when the HTTPS-only attribute is absent. TerraGoat hits that, and the held-out score records the miss.
 - Cosign is optional. The chain a reviewer can check without Sigstore is `MANIFEST.sha256` plus the embedded previous manifest.
-- There is no PDF report.
 - TerraGoat (Bridgecrew, Apache-2.0) is fetched at test time. It is not copied into the repo. See `fixtures/held-out/`.
 
 ## Kurzfassung / Überblick auf Deutsch
@@ -87,7 +90,7 @@ Simulierter Drift, offline: `fixtures/drift/broken` senkt TLS auf 1.0. A.8.9 und
 
 C5:2020: 15 von 121 Kriterien haben eine zugeordnete Prüfung (12.4%). DORA wird nur als Ausschnitt geführt (Art. 5, 6, 8, 9, 10, 11, 12, 13); davon sind Art. 8, 9, 10 und 12 getroffen (50.0%). IT-Grundschutz erscheint als Modul-IDs, ohne Anteil am Kompendium. `BSIG-30` ist eine Zuordnung, keine zweite Pflicht und kein Deckungsgrad. Ob die Verdrängung nach NIS2 für dieses Zahlungsinstitut so trägt, hat kein Anwalt geprüft.
 
-Start: `make demo`. Die Führung in unter 15 Minuten steht in `docs/DEMO.md`. Live-Azure, Prowler und AWS sind nicht Teil von v1. Corrective-Action-Issues und Cosign-Signatur laufen nur, wenn das ausdrücklich eingeschaltet wird. Die sha256-Kette gilt auch ohne sie.
+Start: `make demo`. Die Führung in unter 15 Minuten steht in `docs/DEMO.md`. Bericht und Excel-SoA: `docs/report.pdf` und `docs/NordPay-ISO27001-SoA-and-Mapping.xlsx`. Live-Azure, Prowler und AWS sind nicht Teil von v1. Corrective-Action-Issues und Cosign-Signatur laufen nur, wenn das ausdrücklich eingeschaltet wird. Die sha256-Kette gilt auch ohne sie.
 
 ## Licence
 
