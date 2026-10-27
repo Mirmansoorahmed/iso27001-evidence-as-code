@@ -1,0 +1,11 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+.pytest_cache/
+__pycache__/
+*.egg-info/
+.venv/
+dist/
+*.tar.gz
+.coverage
+htmlcov/

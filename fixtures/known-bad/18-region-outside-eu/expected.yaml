@@ -1,0 +1,5 @@
+id: 18-region-outside-eu
+description: Storage is placed in eastus.
+negative_control: false
+expect_fail:
+- nordpay.region.eu_only

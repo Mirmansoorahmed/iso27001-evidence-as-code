@@ -1,0 +1,588 @@
+version: 2026.10.0
+standard: ISO/IEC 27001:2022 Annex A
+note: Identifiers plus short titles in our own words. Applicability, owners and due dates are NordPay
+  ISMS decisions for this fictional company, not a judgment by the tool. The due date is a planning date
+  in the fiction.
+controls:
+- id: A.5.1
+  title: A written security policy that someone has actually approved
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.2
+  title: Named security roles and who is accountable
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.3
+  title: Splitting duties so one person cannot both act and hide it
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.4
+  title: Managers making their teams follow the security rules
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.5
+  title: How we contact regulators and other authorities
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.6
+  title: Staying in touch with security communities
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.7
+  title: Collecting threat intelligence and using it
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.8
+  title: Security work inside projects, not after them
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.9
+  title: An inventory of information and the assets that hold it
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+  residual: An owner tag is not an asset inventory. The register itself is still maintained by hand.
+- id: A.5.10
+  title: Rules for acceptable use of information and assets
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.11
+  title: Getting assets back when people leave or change role
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.12
+  title: Classifying information by how sensitive it is
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+  residual: The tag records a classification. The scheme, the labels and the handling rules are still
+    documents.
+- id: A.5.13
+  title: Labelling information so the classification is visible
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.14
+  title: Rules for sending information inside and outside the firm
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.15
+  title: Rules for who may access information and systems
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+  residual: Checks cover anonymous blob access, app authentication and subscription Owner. Joiners, movers,
+    leavers and access reviews are manual.
+- id: A.5.16
+  title: Managing identities through their life
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.17
+  title: Handling passwords, keys and other secrets
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.18
+  title: Granting, changing and removing access
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.19
+  title: Security in supplier relationships
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.20
+  title: Security clauses in supplier contracts
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.21
+  title: Security along the ICT supply chain
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.22
+  title: Reviewing supplier services and changing them when needed
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.23
+  title: Security requirements for the cloud services we use
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+  residual: The region allow-list is the automated part. The cloud exit plan and the supplier review are
+    manual.
+- id: A.5.24
+  title: Planning how incidents will be handled
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.25
+  title: Deciding whether an event is really an incident
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.26
+  title: Responding when an incident is confirmed
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.27
+  title: Learning from incidents
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.28
+  title: Collecting and keeping evidence of incidents
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+  residual: Activity-log retention is the automated part. How incident evidence is collected is still
+    a procedure.
+- id: A.5.29
+  title: Keeping security going during a disruption
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.30
+  title: ICT that is ready for a continuity event
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.31
+  title: Finding the laws and contracts that apply to us
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.32
+  title: Protecting intellectual property
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.33
+  title: Protecting records from loss or tampering
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.34
+  title: Privacy and protection of personal data
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.35
+  title: An independent look at the ISMS
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.36
+  title: Checking that people follow the security rules
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.5.37
+  title: Written procedures for operating systems
+  theme: organisational
+  applicability: applicable
+  owner: ISB
+  due: '2027-03-31'
+- id: A.6.1
+  title: Screening people before they start
+  theme: people
+  applicability: applicable
+  owner: People lead
+  due: '2027-03-31'
+- id: A.6.2
+  title: Security terms in the employment contract
+  theme: people
+  applicability: applicable
+  owner: People lead
+  due: '2027-03-31'
+- id: A.6.3
+  title: Security awareness and training
+  theme: people
+  applicability: applicable
+  owner: People lead
+  due: '2027-03-31'
+- id: A.6.4
+  title: A disciplinary route for security violations
+  theme: people
+  applicability: applicable
+  owner: People lead
+  due: '2027-03-31'
+- id: A.6.5
+  title: Duties that remain after someone leaves
+  theme: people
+  applicability: applicable
+  owner: People lead
+  due: '2027-03-31'
+- id: A.6.6
+  title: Confidentiality agreements
+  theme: people
+  applicability: applicable
+  owner: People lead
+  due: '2027-03-31'
+- id: A.6.7
+  title: Security of remote working
+  theme: people
+  applicability: applicable
+  owner: People lead
+  due: '2027-03-31'
+- id: A.6.8
+  title: People reporting security events
+  theme: people
+  applicability: applicable
+  owner: People lead
+  due: '2027-03-31'
+- id: A.7.1
+  title: Physical security boundaries
+  theme: physical
+  applicability: applicable
+  owner: Office manager
+  due: '2027-03-31'
+- id: A.7.2
+  title: Controlling who can walk in
+  theme: physical
+  applicability: applicable
+  owner: Office manager
+  due: '2027-03-31'
+- id: A.7.3
+  title: Securing offices and rooms
+  theme: physical
+  applicability: applicable
+  owner: Office manager
+  due: '2027-03-31'
+- id: A.7.4
+  title: Watching the premises
+  theme: physical
+  applicability: applicable
+  owner: Office manager
+  due: '2027-03-31'
+- id: A.7.5
+  title: Protection from physical and environmental threats
+  theme: physical
+  applicability: applicable
+  owner: Office manager
+  due: '2027-03-31'
+- id: A.7.6
+  title: Working inside a secure area
+  theme: physical
+  applicability: not-applicable
+  justification: NordPay has no secure processing room. The Berlin office is an ordinary workplace, and
+    payment data is not handled there as paper. If a secure room is introduced, this decision is revisited.
+- id: A.7.7
+  title: Clear desk and clear screen
+  theme: physical
+  applicability: applicable
+  owner: Office manager
+  due: '2027-03-31'
+- id: A.7.8
+  title: Where equipment sits and how it is protected
+  theme: physical
+  applicability: applicable
+  owner: Office manager
+  due: '2027-03-31'
+- id: A.7.9
+  title: Assets taken off the premises
+  theme: physical
+  applicability: applicable
+  owner: Office manager
+  due: '2027-03-31'
+- id: A.7.10
+  title: Storage media
+  theme: physical
+  applicability: applicable
+  owner: Office manager
+  due: '2027-03-31'
+- id: A.7.11
+  title: Power and other supporting utilities
+  theme: physical
+  applicability: applicable
+  owner: Office manager
+  due: '2027-03-31'
+- id: A.7.12
+  title: Protecting cables
+  theme: physical
+  applicability: applicable
+  owner: Office manager
+  due: '2027-03-31'
+- id: A.7.13
+  title: Maintaining equipment
+  theme: physical
+  applicability: applicable
+  owner: Office manager
+  due: '2027-03-31'
+- id: A.7.14
+  title: Disposing of equipment or reusing it safely
+  theme: physical
+  applicability: applicable
+  owner: Office manager
+  due: '2027-03-31'
+- id: A.8.1
+  title: Security of user devices
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.2
+  title: Restricting privileged access
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+  residual: Open management ports, wildcard custom roles and subscription Owner are checked. Privileged-access
+    reviews are manual.
+- id: A.8.3
+  title: Restricting access to information
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+  residual: Anonymous blob access is checked. Authorisation inside the application is not.
+- id: A.8.4
+  title: Restricting access to source code
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.5
+  title: Strong authentication
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+  residual: App Service authentication has to be on. Passwords, MFA for people and key rotation are manual.
+- id: A.8.6
+  title: Capacity management
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.7
+  title: Protection against malware
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.8
+  title: Managing technical vulnerabilities
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.9
+  title: Keeping system configuration under control
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+  residual: TLS settings, FTPS and remote debugging are checked. A configuration baseline for everything
+    else is manual.
+- id: A.8.10
+  title: Deleting information when it is no longer needed
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.11
+  title: Masking data
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.12
+  title: Preventing data from leaking
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.13
+  title: Backups of information
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+  residual: Geo-redundant storage, Key Vault recovery and a backup vault resource are checked. Restore
+    tests are manual.
+- id: A.8.14
+  title: Redundancy of processing
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+  residual: Geo-redundant storage is the only automated signal. There is no failover test.
+- id: A.8.15
+  title: Producing security logs
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+  residual: Queue logs, HTTP logs, diagnostic settings and retention are checked. Someone still has to
+    read the logs.
+- id: A.8.16
+  title: Watching systems for anomalies
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+  residual: A diagnostic setting is not a monitoring process. Alerts and on-call stay manual.
+- id: A.8.17
+  title: Keeping clocks in sync
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.18
+  title: Controlling privileged utility programs
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.19
+  title: Installing software on production systems
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.20
+  title: Network security
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+  residual: Default-deny, admin ports, Key Vault exposure and FTPS are checked. The network diagram and
+    rule reviews are manual.
+- id: A.8.21
+  title: Security of network services
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.22
+  title: Separating networks
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.23
+  title: Filtering web access
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.24
+  title: Cryptography for data and for keys
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+  residual: TLS, HTTPS and purge protection are checked. Algorithm choice and the key ceremony are manual.
+- id: A.8.25
+  title: A secure development lifecycle
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.26
+  title: Security requirements for applications
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.27
+  title: Secure architecture principles
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.28
+  title: Secure coding
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.29
+  title: Security testing before release
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.30
+  title: Development that is done by a supplier
+  theme: technological
+  applicability: not-applicable
+  justification: NordPay does not outsource software development. Employees build the product. If a development
+    supplier is contracted, this control becomes applicable.
+- id: A.8.31
+  title: Separating development, test and production
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.32
+  title: Change management
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.33
+  title: Protecting test data
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'
+- id: A.8.34
+  title: Protecting systems while they are being audited
+  theme: technological
+  applicability: applicable
+  owner: Cloud platform
+  due: '2027-03-31'

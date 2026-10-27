@@ -1,0 +1,5 @@
+id: 15-appservice-no-auth
+description: Web app authentication is off.
+negative_control: false
+expect_fail:
+- CKV_AZURE_13

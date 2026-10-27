@@ -1,0 +1,5 @@
+id: 05-storage-lrs
+description: Storage replication is LRS, not geo-redundant.
+negative_control: false
+expect_fail:
+- CKV_AZURE_206

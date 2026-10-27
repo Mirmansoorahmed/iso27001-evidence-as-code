@@ -1,0 +1,6 @@
+id: 19-tags-missing
+description: Storage has no classification or owner tag.
+negative_control: false
+expect_fail:
+- nordpay.tags.data_classification
+- nordpay.tags.owner

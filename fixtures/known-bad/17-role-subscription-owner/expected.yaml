@@ -1,0 +1,5 @@
+id: 17-role-subscription-owner
+description: A role assignment grants Owner on the subscription.
+negative_control: false
+expect_fail:
+- nordpay.rbac.no_subscription_owner

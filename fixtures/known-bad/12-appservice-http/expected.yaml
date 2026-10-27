@@ -1,0 +1,5 @@
+id: 12-appservice-http
+description: Web app does not force HTTPS.
+negative_control: false
+expect_fail:
+- CKV_AZURE_14

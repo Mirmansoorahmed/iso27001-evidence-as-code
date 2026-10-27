@@ -1,0 +1,296 @@
+version: "2026.10.0"
+judgment: >
+  The links below are my judgment of which technical check supports which
+  control. They are not certified, and a passing check is not a compliance
+  claim. Short titles elsewhere in this repo are my own glosses. No text
+  from ISO/IEC 27001, BSI C5 or DORA is copied here.
+c5_criteria_total: 121
+c5_criteria_total_source: "https://www.bsi.bund.de/EN/Themen/Unternehmen-und-Organisationen/Informationen-und-Empfehlungen/Empfehlungen-nach-Angriffszielen/Cloud-Computing/Kriterienkatalog-C5/C5_Einfuehrung/C5_Einfuehrung.html"
+c5_gloss:
+  AM-01: "Knowing which assets you have"
+  AM-06: "Classifying assets and making that visible"
+  COS-01: "Technical safeguards on the network"
+  COS-02: "Security requirements for connections"
+  COS-05: "Administration traffic kept apart"
+  COS-08: "Rules for transmitting data"
+  CRY-02: "Encrypting data while it moves"
+  CRY-04: "Keys that cannot be quietly destroyed"
+  IDM-06: "Privileged access"
+  IDM-07: "Access to customer data"
+  IDM-09: "How users and apps authenticate"
+  OPS-06: "Backup and recovery concept"
+  OPS-10: "What gets logged"
+  OPS-14: "Keeping the logs"
+  PSS-12: "Where data is processed and stored"
+grundschutz_gloss:
+  APP.3.1: "Web applications"
+  CON.1: "Cryptographic concept"
+  CON.3: "Backup concept"
+  DER.1: "Detecting security events"
+  NET.1.1: "Network architecture"
+  NET.3.2: "Firewall"
+  OPS.1.1.2: "Orderly IT administration"
+  OPS.1.1.5: "Logging"
+  OPS.2.2: "Using cloud services"
+  ORP.4: "Identity and access"
+dora_tracked:
+  - id: Art.5
+    topic: "The management body stays responsible for ICT risk"
+  - id: Art.6
+    topic: "The ICT risk-management framework"
+  - id: Art.8
+    topic: "Identify the ICT assets and dependencies that matter"
+  - id: Art.9
+    topic: "Protect systems and prevent incidents"
+  - id: Art.10
+    topic: "Detect anomalous activity"
+  - id: Art.11
+    topic: "Respond and recover"
+  - id: Art.12
+    topic: "Back up and restore"
+  - id: Art.13
+    topic: "Learn from incidents and adjust"
+nis2:
+  tag: BSIG-30
+  note: >
+    NordPay is framed as a payment institution, so this demo treats DORA as
+    the regime in scope. NIS2's own risk-management measures are largely
+    displaced for financial entities that DORA already covers; that is the
+    lex-specialis idea in NIS2 Article 4, and the German implementation sits
+    in the BSIG after the NIS2 implementation act. I have not had a lawyer
+    confirm the exact wording of that displacement. BSIG-30 is therefore a
+    crosswalk tag on technical checks, not a second obligation and not a
+    coverage percentage.
+rules:
+  - id: CKV_AZURE_3
+    tool: checkov
+    title: "Storage accepts HTTPS only"
+    iso: [A.8.24]
+    c5: [CRY-02]
+    grundschutz: [CON.1]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_44
+    tool: checkov
+    title: "Storage refuses TLS older than 1.2"
+    iso: [A.8.24, A.8.9]
+    c5: [CRY-02]
+    grundschutz: [CON.1, OPS.1.1.2]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_190
+    tool: checkov
+    title: "Storage does not allow anonymous blob access"
+    iso: [A.5.15, A.8.3]
+    c5: [IDM-07]
+    grundschutz: [ORP.4]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_35
+    tool: checkov
+    title: "Storage network default is deny"
+    iso: [A.8.20]
+    c5: [COS-01]
+    grundschutz: [NET.1.1, NET.3.2]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_36
+    tool: checkov
+    title: "Locked-down storage still allows trusted Azure services"
+    iso: [A.8.20]
+    c5: [COS-02]
+    grundschutz: [NET.3.2]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_206
+    tool: checkov
+    title: "Storage replication is geo-redundant"
+    iso: [A.8.13, A.8.14]
+    c5: [OPS-06]
+    grundschutz: [CON.3]
+    dora: [Art.12]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_33
+    tool: checkov
+    title: "Storage queue requests are logged"
+    iso: [A.8.15]
+    c5: [OPS-10]
+    grundschutz: [OPS.1.1.5]
+    dora: [Art.10]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_110
+    tool: checkov
+    title: "Key Vault purge protection is on"
+    iso: [A.8.24]
+    c5: [CRY-04]
+    grundschutz: [CON.1]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_42
+    tool: checkov
+    title: "Key Vault can be recovered"
+    iso: [A.8.13]
+    c5: [CRY-04]
+    grundschutz: [CON.1, CON.3]
+    dora: [Art.12]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_111
+    tool: checkov
+    title: "Key Vault soft delete is not switched off"
+    iso: [A.8.13]
+    c5: [OPS-06]
+    grundschutz: [CON.3]
+    dora: [Art.12]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_189
+    tool: checkov
+    title: "Key Vault is not open to the public network"
+    iso: [A.8.20]
+    c5: [COS-01]
+    grundschutz: [NET.3.2]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_10
+    tool: checkov
+    title: "SSH from the internet is not allowed"
+    iso: [A.8.2, A.8.20]
+    c5: [COS-05, IDM-06]
+    grundschutz: [NET.3.2, ORP.4]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_9
+    tool: checkov
+    title: "RDP from the internet is not allowed"
+    iso: [A.8.2, A.8.20]
+    c5: [COS-05, IDM-06]
+    grundschutz: [NET.3.2, ORP.4]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_14
+    tool: checkov
+    title: "The web app redirects HTTP to HTTPS"
+    iso: [A.8.24]
+    c5: [CRY-02]
+    grundschutz: [CON.1, APP.3.1]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_15
+    tool: checkov
+    title: "The web app refuses TLS older than 1.2"
+    iso: [A.8.9, A.8.24]
+    c5: [CRY-02]
+    grundschutz: [CON.1, APP.3.1]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_78
+    tool: checkov
+    title: "FTP deployment on the web app is disabled"
+    iso: [A.8.9, A.8.20]
+    c5: [COS-08]
+    grundschutz: [OPS.1.1.2, APP.3.1]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_13
+    tool: checkov
+    title: "The web app has authentication switched on"
+    iso: [A.5.15, A.8.5]
+    c5: [IDM-09]
+    grundschutz: [ORP.4, APP.3.1]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_63
+    tool: checkov
+    title: "The web app writes HTTP logs"
+    iso: [A.8.15]
+    c5: [OPS-10]
+    grundschutz: [OPS.1.1.5, APP.3.1]
+    dora: [Art.10]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_72
+    tool: checkov
+    title: "Remote debugging on the web app is off"
+    iso: [A.8.9]
+    c5: [COS-05]
+    grundschutz: [OPS.1.1.2, APP.3.1]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_39
+    tool: checkov
+    title: "No custom role is a wildcard Owner"
+    iso: [A.8.2]
+    c5: [IDM-06]
+    grundschutz: [ORP.4]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: CKV_AZURE_37
+    tool: checkov
+    title: "Activity log retention is at least 365 days"
+    iso: [A.5.28, A.8.15]
+    c5: [OPS-14]
+    grundschutz: [OPS.1.1.5]
+    dora: [Art.10]
+    nis2: [BSIG-30]
+  - id: nordpay.tags.data_classification
+    tool: conftest
+    title: "Resources carry a data-classification tag"
+    iso: [A.5.12]
+    c5: [AM-06]
+    grundschutz: [OPS.2.2]
+    dora: [Art.8]
+    nis2: []
+  - id: nordpay.tags.owner
+    tool: conftest
+    title: "Resources carry an owner tag"
+    iso: [A.5.9]
+    c5: [AM-01]
+    grundschutz: [OPS.2.2]
+    dora: [Art.8]
+    nis2: []
+  - id: nordpay.region.eu_only
+    tool: conftest
+    title: "Resources stay in the EU region allow-list"
+    iso: [A.5.23]
+    c5: [PSS-12]
+    grundschutz: [OPS.2.2]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: nordpay.keyvault.purge_protection_confidential
+    tool: conftest
+    title: "Confidential Key Vaults cannot be purged"
+    iso: [A.8.24]
+    c5: [CRY-04]
+    grundschutz: [CON.1]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: nordpay.rbac.no_subscription_owner
+    tool: conftest
+    title: "No standing Owner on the subscription"
+    iso: [A.5.15, A.8.2]
+    c5: [IDM-06]
+    grundschutz: [ORP.4]
+    dora: [Art.9]
+    nis2: [BSIG-30]
+  - id: nordpay.diagnostics.required
+    tool: conftest
+    title: "Prod data resources have a diagnostic setting"
+    iso: [A.8.15, A.8.16]
+    c5: [OPS-10]
+    grundschutz: [OPS.1.1.5, DER.1]
+    dora: [Art.10]
+    nis2: [BSIG-30]
+  - id: nordpay.backup.vault_for_prod
+    tool: conftest
+    title: "A prod module contains a Recovery Services vault"
+    iso: [A.8.13]
+    c5: [OPS-06]
+    grundschutz: [CON.3]
+    dora: [Art.12]
+    nis2: [BSIG-30]
+  - id: nordpay.logging.retention
+    tool: conftest
+    title: "Log Analytics keeps at least 90 days"
+    iso: [A.8.15]
+    c5: [OPS-14]
+    grundschutz: [OPS.1.1.5]
+    dora: [Art.10]
+    nis2: [BSIG-30]

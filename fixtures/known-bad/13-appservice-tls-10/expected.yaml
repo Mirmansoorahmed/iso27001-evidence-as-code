@@ -1,0 +1,5 @@
+id: 13-appservice-tls-10
+description: Web app minimum TLS is 1.0.
+negative_control: false
+expect_fail:
+- CKV_AZURE_15

@@ -1,0 +1,69 @@
+name: evidence
+
+on:
+  pull_request:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  # Used only when the repository variable EAC_CAPA is the string true.
+  issues: write
+  # Used only when EAC_COSIGN is true, for keyless cosign.
+  id-token: write
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.10.5"
+          terraform_wrapper: false
+
+      - name: Install Conftest
+        run: |
+          curl -fsSL -o /tmp/conftest.tar.gz https://github.com/open-policy-agent/conftest/releases/download/v0.71.1/conftest_0.71.1_Linux_x86_64.tar.gz
+          sudo tar -xzf /tmp/conftest.tar.gz -C /usr/local/bin conftest
+          conftest --version
+
+      - name: Install the pipeline
+        run: python -m pip install -e ".[dev]" "checkov==3.2.449"
+
+      - name: Validate the landing zone
+        run: make validate
+
+      - name: Test
+        run: pytest
+
+      - name: Open corrective-action issues
+        if: vars.EAC_CAPA == 'true'
+        env:
+          EAC_CAPA: "1"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: eac capa --evidence results/evidence.json
+
+      - name: Sign the manifest
+        if: vars.EAC_COSIGN == 'true'
+        env:
+          EAC_COSIGN: "1"
+        run: |
+          curl -fsSL -o /tmp/cosign https://github.com/sigstore/cosign/releases/download/v2.4.3/cosign-linux-amd64
+          sudo install /tmp/cosign /usr/local/bin/cosign
+          eac sign --manifest results/chain/latest.sha256
+
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('results/summary.json') != ''
+        with:
+          name: evidence-measurement
+          path: |
+            results
+            dashboard

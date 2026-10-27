@@ -1,0 +1,5 @@
+id: 09-keyvault-public-network
+description: Key Vault public network access is on.
+negative_control: false
+expect_fail:
+- CKV_AZURE_189

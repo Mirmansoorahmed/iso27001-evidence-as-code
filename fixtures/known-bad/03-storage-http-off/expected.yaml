@@ -1,0 +1,5 @@
+id: 03-storage-http-off
+description: Storage allows plain HTTP.
+negative_control: false
+expect_fail:
+- CKV_AZURE_3

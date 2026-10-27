@@ -1,0 +1,5 @@
+# External tools. Not installed by pip.
+# The measurement run used these exact versions; CI installs the same ones.
+checkov==3.2.449
+conftest==0.71.1
+terraform==1.10.5

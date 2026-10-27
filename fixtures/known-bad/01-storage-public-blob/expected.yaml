@@ -1,0 +1,5 @@
+id: 01-storage-public-blob
+description: Anonymous blob access is on. TLS stays at 1.2.
+negative_control: false
+expect_fail:
+- CKV_AZURE_190
