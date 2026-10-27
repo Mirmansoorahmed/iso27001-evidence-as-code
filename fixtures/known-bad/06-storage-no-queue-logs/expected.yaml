@@ -1,0 +1,5 @@
+id: 06-storage-no-queue-logs
+description: Storage queue logging is missing.
+negative_control: false
+expect_fail:
+- CKV_AZURE_33

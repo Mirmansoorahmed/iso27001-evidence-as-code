@@ -1,0 +1,5 @@
+id: 16-role-custom-owner
+description: Custom role grants every action.
+negative_control: false
+expect_fail:
+- CKV_AZURE_39

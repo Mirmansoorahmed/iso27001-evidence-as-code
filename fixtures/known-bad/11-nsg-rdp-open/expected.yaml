@@ -1,0 +1,5 @@
+id: 11-nsg-rdp-open
+description: NSG allows RDP from the internet.
+negative_control: false
+expect_fail:
+- CKV_AZURE_9

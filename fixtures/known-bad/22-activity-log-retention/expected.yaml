@@ -1,0 +1,5 @@
+id: 22-activity-log-retention
+description: Activity log retention is 30 days.
+negative_control: false
+expect_fail:
+- CKV_AZURE_37

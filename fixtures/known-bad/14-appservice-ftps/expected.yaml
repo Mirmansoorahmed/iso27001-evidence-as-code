@@ -1,0 +1,5 @@
+id: 14-appservice-ftps
+description: Web app allows FTP.
+negative_control: false
+expect_fail:
+- CKV_AZURE_78

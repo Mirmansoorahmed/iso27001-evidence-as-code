@@ -1,0 +1,5 @@
+id: 21-backup-missing
+description: Prod storage has a diagnostic setting and no recovery vault.
+negative_control: false
+expect_fail:
+- nordpay.backup.vault_for_prod

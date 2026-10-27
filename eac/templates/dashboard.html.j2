@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NordPay SoA — {{ payload.period }}</title>
+  <style>
+    :root {
+      --ink: #1c1917;
+      --muted: #57534e;
+      --line: #e7e5e4;
+      --paper: #f7f6f3;
+      --card: #fff;
+      --navy: #1e3a5f;
+      --fail: #9f1239;
+      --fail-bg: #fff1f2;
+      --partial: #3f6212;
+      --partial-bg: #f7fee7;
+      --manual: #44403c;
+      --manual-bg: #f5f5f4;
+      --na: #78716c;
+      --na-bg: #fafaf9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 16px/1.5 "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+    header, main { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1.25rem; }
+    header { padding-bottom: 0; }
+    h1 { font-size: 1.8rem; line-height: 1.2; margin: 0 0 0.3rem; letter-spacing: -0.02em; }
+    h2 { font-size: 1.15rem; margin: 2rem 0 0.6rem; }
+    p { margin: 0.4rem 0; }
+    .kicker { color: var(--navy); font-variant: small-caps; letter-spacing: 0.06em; font-size: 0.85rem; }
+    .note { color: var(--muted); font-size: 0.95rem; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.6rem; margin: 1rem 0; }
+    .stat { background: var(--card); border: 1px solid var(--line); padding: 0.7rem 0.8rem; }
+    .stat b { display: block; font-size: 1.4rem; font-variant-numeric: tabular-nums; }
+    .stat span { color: var(--muted); font-size: 0.85rem; }
+    table { width: 100%; border-collapse: collapse; background: var(--card); font-size: 0.92rem; }
+    th, td { text-align: left; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+    .pill { display: inline-block; padding: 0.05rem 0.4rem; border-radius: 2px; font-size: 0.78rem; font-family: ui-sans-serif, system-ui, sans-serif; }
+    .automated-fail { color: var(--fail); background: var(--fail-bg); }
+    .partial { color: var(--partial); background: var(--partial-bg); }
+    .automated-pass { color: var(--partial); background: var(--partial-bg); }
+    .manual { color: var(--manual); background: var(--manual-bg); }
+    .not-applicable { color: var(--na); background: var(--na-bg); }
+    .toolbar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 0.6rem 0; }
+    .toolbar button, .toolbar input {
+      font: inherit; font-size: 0.9rem; padding: 0.3rem 0.5rem;
+      border: 1px solid var(--line); background: var(--card); color: var(--ink);
+    }
+    .toolbar button[aria-pressed="true"] { border-color: var(--navy); color: var(--navy); }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.82rem; }
+    footer { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem 2rem; color: var(--muted); font-size: 0.9rem; }
+    @media (max-width: 720px) {
+      table { display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="kicker">NordPay GmbH · fictional · offline evidence</p>
+    <h1>Statement of applicability, {{ payload.period }}</h1>
+    <p class="note">Landing zone <span class="mono">lz/</span>, scanned {{ payload.observed_at }}. A partial status means the automated checks passed and the rest of the control is still manual. This page is not a certification.</p>
+  </header>
+  <main>
+    <section class="stats">
+      {% for key, label in [
+        ("partial", "Partial — checks passed"),
+        ("automated-fail", "Automated fail"),
+        ("automated-pass", "Automated pass"),
+        ("manual", "Manual"),
+        ("not-applicable", "Not applicable")
+      ] %}
+      <div class="stat"><b>{{ payload.counts[key] }}</b><span>{{ label }}</span></div>
+      {% endfor %}
+    </section>
+    <p>Annex A controls with at least one automated check: <strong>{{ payload.annex.with_automated_check }} of {{ payload.annex.total }}</strong> ({{ payload.annex.automation_coverage_pct }}%). C5:2020 criteria with a check: {{ payload.c5.with_automated_check|length }} of {{ payload.c5.criteria_in_catalogue_2020 }} ({{ payload.c5.coverage_pct }}%). DORA articles in the tracked slice with a check: {{ payload.dora.with_automated_check|length }} of {{ payload.dora.tracked|length }} ({{ payload.dora.coverage_pct }}%).</p>
+
+    <h2>Controls</h2>
+    <div class="toolbar">
+      <button type="button" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="automated-fail">Fail</button>
+      <button type="button" data-filter="partial">Partial</button>
+      <button type="button" data-filter="manual">Manual</button>
+      <button type="button" data-filter="not-applicable">N/A</button>
+      <input id="q" type="search" placeholder="Filter by id or title" aria-label="Filter controls">
+    </div>
+    <table id="soa">
+      <thead>
+        <tr><th>Id</th><th>Status</th><th>Title</th><th>What the check does not cover</th></tr>
+      </thead>
+      <tbody>
+        {% for row in payload.rows %}
+        <tr data-status="{{ row.status }}">
+          <td class="mono">{{ row.id }}</td>
+          <td><span class="pill {{ row.status }}">{{ row.status }}</span></td>
+          <td>{{ row.title }}{% if row.justification %}<div class="note">{{ row.justification }}</div>{% endif %}</td>
+          <td class="note">{{ row.residual or "" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h2>If the sample pull request landed</h2>
+    <p class="note">{{ payload.pr_preview.note }}</p>
+    {% if payload.pr_preview.failed %}
+    <ul>
+      {% for item in payload.pr_preview.failed %}
+      <li><span class="mono">{{ item.control }}</span> {{ item.title }} — {{ item.rules|join(", ") }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No automated failures in the sample change.</p>
+    {% endif %}
+
+    <h2>Drift</h2>
+    <p class="note">{{ payload.drift.note }}</p>
+    {% if payload.drift.lost %}
+    <ul>
+      {% for item in payload.drift.lost %}
+      <li><span class="mono">{{ item.control }}</span> lost evidence at <span class="mono">{{ item.commit }}</span> ({{ item.rules|join(", ") }})</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No control lost evidence between the drift fixtures.</p>
+    {% endif %}
+
+    <h2>Own fixtures</h2>
+    <p>True positive {{ payload.fixtures.true_positive }}, false positive {{ payload.fixtures.false_positive }}, false negative {{ payload.fixtures.false_negative }}, true negative {{ payload.fixtures.true_negative }}. {{ payload.fixtures.note }}</p>
+
+    <h2>Chain</h2>
+    <p class="mono">manifest {{ payload.manifest_sha256 }}</p>
+    <p class="mono">previous {{ payload.prev_manifest_sha256 or "(genesis)" }}</p>
+    <p class="note">Tools: Checkov {{ payload.tools.checkov }}, Conftest {{ payload.tools.conftest }}.</p>
+  </main>
+  <footer>
+    Catalogue {{ payload.catalogue_version }}. NordPay GmbH is not a real company. Mappings are the author's judgment.
+  </footer>
+  <script>
+    const buttons = document.querySelectorAll(".toolbar button");
+    const query = document.getElementById("q");
+    let status = "all";
+    function apply() {
+      const q = query.value.trim().toLowerCase();
+      document.querySelectorAll("#soa tbody tr").forEach((row) => {
+        const okStatus = status === "all" || row.dataset.status === status;
+        const text = row.textContent.toLowerCase();
+        row.hidden = !(okStatus && (!q || text.includes(q)));
+      });
+    }
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        status = button.dataset.filter;
+        buttons.forEach((item) => item.setAttribute("aria-pressed", item === button ? "true" : "false"));
+        apply();
+      });
+    });
+    query.addEventListener("input", apply);
+  </script>
+</body>
+</html>

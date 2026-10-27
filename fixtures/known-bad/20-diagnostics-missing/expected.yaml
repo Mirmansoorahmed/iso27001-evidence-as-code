@@ -1,0 +1,5 @@
+id: 20-diagnostics-missing
+description: Prod storage has a backup vault and no diagnostic setting.
+negative_control: false
+expect_fail:
+- nordpay.diagnostics.required

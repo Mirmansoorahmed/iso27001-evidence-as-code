@@ -1,0 +1,7 @@
+id: 07-keyvault-no-purge
+description: Confidential Key Vault has purge protection off.
+negative_control: false
+expect_fail:
+- CKV_AZURE_110
+- CKV_AZURE_42
+- nordpay.keyvault.purge_protection_confidential

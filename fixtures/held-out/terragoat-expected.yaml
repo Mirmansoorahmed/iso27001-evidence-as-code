@@ -1,0 +1,118 @@
+commit: "729f8da62c6a85ce4af5ad3d123de97776d954c4"
+license: Apache-2.0
+source: https://github.com/bridgecrewio/terragoat
+note: >
+  Ground truth was read from terraform/azure at that commit, before scoring.
+  Technical rows are the adopted Checkov rules. NordPay rows are our Rego
+  policies, which TerraGoat was never written to satisfy; they are reported
+  separately so a missing tag is not counted as a TerraGoat detection.
+technical:
+  CKV_AZURE_3:
+    expect: fail
+    explicit: false
+    why: "The storage account never sets enable_https_traffic_only."
+  CKV_AZURE_44:
+    expect: fail
+    explicit: false
+    why: "min_tls_version is not set on the storage account."
+  CKV_AZURE_190:
+    expect: fail
+    explicit: false
+    why: "allow_nested_items_to_be_public is not set to false."
+  CKV_AZURE_35:
+    expect: pass
+    explicit: true
+    why: "azurerm_storage_account_network_rules sets default_action to Deny."
+  CKV_AZURE_36:
+    expect: fail
+    explicit: true
+    why: "The network rule bypasses Metrics, not AzureServices."
+  CKV_AZURE_206:
+    expect: fail
+    explicit: true
+    why: "storage.tf uses GRS, which the check allows, but mssql.tf security_storage_account sets account_replication_type to LRS. One failing account fails the rule."
+  CKV_AZURE_33:
+    expect: fail
+    explicit: true
+    why: "Queue logging sets read and delete to false."
+  CKV_AZURE_110:
+    expect: fail
+    explicit: false
+    why: "The Key Vault does not set purge_protection_enabled."
+  CKV_AZURE_42:
+    expect: fail
+    explicit: false
+    why: "Purge protection is unset, so the vault is not recoverable."
+  CKV_AZURE_111:
+    expect: pass
+    explicit: false
+    why: "soft_delete_enabled is unset. This check treats a missing attribute as a pass."
+  CKV_AZURE_189:
+    expect: fail
+    explicit: false
+    why: "public_network_access_enabled is unset and there is no network ACL."
+  CKV_AZURE_10:
+    expect: fail
+    explicit: true
+    why: "The NSG allows TCP 22-22 from *."
+  CKV_AZURE_9:
+    expect: fail
+    explicit: true
+    why: "The NSG allows TCP 3389-3389 from *."
+  CKV_AZURE_14:
+    expect: fail
+    explicit: true
+    why: "app-service1 sets https_only to false."
+  CKV_AZURE_15:
+    expect: fail
+    explicit: true
+    why: "app-service1 sets min_tls_version to 1.1."
+  CKV_AZURE_78:
+    expect: fail
+    explicit: false
+    why: "Neither app service sets ftps_state."
+  CKV_AZURE_13:
+    expect: fail
+    explicit: true
+    why: "app-service1 has no auth block and app-service2 sets auth enabled to false."
+  CKV_AZURE_63:
+    expect: fail
+    explicit: false
+    why: "Neither app service configures HTTP logs."
+  CKV_AZURE_72:
+    expect: pass
+    explicit: false
+    why: "remote_debugging_enabled is unset and this check treats that as a pass."
+  CKV_AZURE_39:
+    expect: fail
+    explicit: true
+    why: "The custom role sets actions to *."
+  CKV_AZURE_37:
+    expect: fail
+    explicit: true
+    why: "The activity log profile retains 30 days."
+nordpay:
+  nordpay.tags.data_classification:
+    expect: fail
+    why: "TerraGoat tags do not include data_classification."
+  nordpay.tags.owner:
+    expect: fail
+    why: "TerraGoat tags do not include a NordPay owner."
+  nordpay.region.eu_only:
+    expect: fail
+    why: "Locations are var.location (default East US). The policy does not evaluate variables and fails closed."
+  nordpay.keyvault.purge_protection_confidential:
+    expect: pass
+    why: "The vault is not tagged confidential, so this NordPay rule does not apply."
+  nordpay.rbac.no_subscription_owner:
+    expect: pass
+    why: "There is a wildcard custom role and no Owner role assignment."
+  nordpay.diagnostics.required:
+    expect: pass
+    why: "Nothing is tagged environment=prod as a literal."
+  nordpay.backup.vault_for_prod:
+    expect: pass
+    why: "The backup rule only applies when a data resource is tagged prod."
+  nordpay.logging.retention:
+    expect: pass
+    why: "There is no Log Analytics workspace. The short retention is on a log profile, covered by CKV_AZURE_37."

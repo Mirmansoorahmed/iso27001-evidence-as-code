@@ -1,0 +1,4 @@
+id: 23-role-owner-on-group
+description: Owner on a resource group. The subscription-Owner rule must not fire.
+negative_control: true
+expect_fail: []

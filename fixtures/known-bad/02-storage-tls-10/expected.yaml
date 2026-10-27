@@ -1,0 +1,5 @@
+id: 02-storage-tls-10
+description: Storage minimum TLS is 1.0.
+negative_control: false
+expect_fail:
+- CKV_AZURE_44

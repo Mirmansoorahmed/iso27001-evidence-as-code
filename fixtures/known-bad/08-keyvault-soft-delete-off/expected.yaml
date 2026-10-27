@@ -1,0 +1,7 @@
+id: 08-keyvault-soft-delete-off
+description: Key Vault soft delete is explicitly off. Classification is internal,
+  so the confidential purge rule stays quiet.
+negative_control: false
+expect_fail:
+- CKV_AZURE_111
+- CKV_AZURE_42
